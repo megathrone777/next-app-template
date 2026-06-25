@@ -1,0 +1,43 @@
+"use server";
+import { randomBytes } from "crypto";
+
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+
+import { store } from "@/store";
+import { verifyPassword } from "@/utils";
+
+const COOKIE_NAME = "session";
+const SESSION_TTL = 60 * 60 * 24 * 30;
+
+const createSession = async (data: TSessionData): Promise<void> => {
+  const sessionId = randomBytes(32).toString("hex");
+
+  await store.sessions.set(sessionId, data, SESSION_TTL);
+  const cookieStore = await cookies();
+
+  cookieStore.set(COOKIE_NAME, sessionId, {
+    httpOnly: true,
+    maxAge: SESSION_TTL,
+    path: "/",
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
+};
+
+const login = async (formData: FormData): Promise<void> => {
+  const loginValue = formData.get("login");
+  const passwordValue = formData.get("password");
+
+  if (typeof loginValue !== "string" || typeof passwordValue !== "string") return;
+  const user = await store.users.get(loginValue.trim().toLowerCase());
+
+  if (!user || !verifyPassword(passwordValue.trim(), user.passwordHash, user.salt)) return;
+  await createSession({ role: user.role, userId: user.id });
+
+  if (user.role === "admin") {
+    redirect("/admin", "replace");
+  }
+};
+
+export { login };
