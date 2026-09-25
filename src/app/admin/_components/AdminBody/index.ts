@@ -1,1 +1,0 @@
-export { AdminBody } from "./AdminBody";

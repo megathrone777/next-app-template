@@ -1,4 +1,4 @@
-import type { StyleArg } from "./types";
+import type { StyleArg } from "@/theme";
 
 const lineClamp = (lines: number): StyleArg => ({
   display: "-webkit-box",

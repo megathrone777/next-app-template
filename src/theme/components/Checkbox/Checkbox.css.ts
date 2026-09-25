@@ -1,4 +1,4 @@
-import { style, styleVariants } from "@/theme";
+import { style, recipe } from "@/theme";
 
 export const wrapperClass = style(({ devices }) => ({
   alignItems: "start",
@@ -14,36 +14,39 @@ export const wrapperClass = style(({ devices }) => ({
   },
 }));
 
-export const layoutClass = styleVariants(
-  {
-    normal: {
-      height: 25,
-      minWidth: 25,
-      width: 25,
-    },
-
-    small: {
-      height: 21,
-      minWidth: 21,
-      width: 21,
-    },
+export const layoutClass = recipe(({ colors }) => ({
+  base: {
+    alignContent: "center",
+    alignItems: "center",
+    border: `2px solid ${colors.red}`,
+    borderRadius: "50%",
+    color: colors.red,
+    display: "grid",
+    justifyContent: "center",
+    overflow: "hidden",
+    position: "relative",
   },
 
-  (template, { colors }) => [
-    {
-      alignContent: "center",
-      alignItems: "center",
-      border: `2px solid ${colors.red}`,
-      borderRadius: "50%",
-      color: colors.red,
-      display: "grid",
-      justifyContent: "center",
-      overflow: "hidden",
-      position: "relative",
+  defaultVariants: {
+    template: "normal",
+  },
+
+  variants: {
+    template: {
+      normal: {
+        height: 25,
+        minWidth: 25,
+        width: 25,
+      },
+
+      small: {
+        height: 21,
+        minWidth: 21,
+        width: 21,
+      },
     },
-    template,
-  ]
-);
+  },
+}));
 
 export const inputClass = style({
   cursor: "pointer",
@@ -57,56 +60,62 @@ export const inputClass = style({
   zIndex: 2,
 });
 
-export const iconClass = styleVariants(
-  ({ devices }) => ({
-    normal: {
-      height: 13,
+export const iconClass = recipe(({ devices }) => ({
+  base: {
+    display: "none",
+    pointerEvents: "none",
+    selectors: {
+      [`${inputClass}:checked + &`]: {
+        display: "block",
+      },
     },
+    transform: "translateY(1px)",
+  },
 
-    small: {
-      height: 10,
+  defaultVariants: {
+    template: "normal",
+  },
 
-      "@media": {
-        [devices.desktopLg]: {
-          transform: "none",
+  variants: {
+    template: {
+      normal: {
+        height: 13,
+      },
+
+      small: {
+        height: 10,
+
+        "@media": {
+          [devices.desktopLg]: {
+            transform: "none",
+          },
         },
       },
     },
-  }),
+  },
+}));
 
-  (template) => [
-    {
-      display: "none",
-      pointerEvents: "none",
-      selectors: {
-        [`${inputClass}:checked + &`]: {
-          display: "block",
-        },
+export const labelClass = recipe(({ fonts }) => ({
+  base: {
+    cursor: "pointer",
+    userSelect: "none",
+  },
+
+  defaultVariants: {
+    template: "normal",
+  },
+
+  variants: {
+    template: {
+      normal: {
+        fontWeight: fonts.medium,
+        lineHeight: "25px",
       },
-      transform: "translateY(1px)",
-    },
-    template,
-  ]
-);
 
-export const labelClass = styleVariants(
-  ({ fonts }) => ({
-    normal: {
-      fontWeight: fonts.medium,
-      lineHeight: "25px",
+      small: {
+        fontWeight: fonts.medium,
+        lineHeight: "21px",
+      },
     },
-
-    small: {
-      fontWeight: fonts.medium,
-      lineHeight: "21px",
-    },
-  }),
-
-  (template) => [
-    {
-      cursor: "pointer",
-      userSelect: "none",
-    },
-    template,
-  ]
-);
+  },
+}));

@@ -1,4 +1,4 @@
-import { style, styleVariants } from "@/theme";
+import { style, recipe, type RecipeVariants } from "@/theme";
 
 export const wrapperClass = style({
   display: "grid",
@@ -20,76 +20,79 @@ export const labelClass = style(({ fonts }) => ({
   userSelect: "none",
 }));
 
-export const inputClass = styleVariants(
-  ({ colors }) => ({
-    default: {
-      color: "black",
-      selectors: {
-        "&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active":
-          {
-            caretColor: "black",
-            transition: "background-color 9999s ease-out",
-            WebkitBoxShadow: "0 0 0 1000px white inset",
-            WebkitTextFillColor: "black",
-          },
-      },
+export const inputClass = recipe(({ colors, fonts }) => ({
+  base: {
+    appearance: "none",
+    backgroundColor: "transparent",
+    border: "none",
+    borderRadius: 0,
+    fontFamily: "inherit",
+    fontSize: 16,
+    fontWeight: fonts.medium,
+    height: "100%",
+    width: "100%",
+
+    ":disabled": {
+      cursor: "not-allowed",
+      opacity: 0.7,
+    },
+
+    ":focus": {
+      outline: "none",
 
       "::placeholder": {
-        color: colors.grayDarker,
+        color: "transparent",
       },
     },
 
-    error: {
-      color: "black",
-      selectors: {
-        "&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active":
-          {
-            caretColor: "black",
-            transition: "background-color 9999s ease-out",
-            WebkitBoxShadow: "0 0 0 1000px white inset",
-            WebkitTextFillColor: colors.red,
-          },
-      },
-
-      "::placeholder": {
-        color: colors.red,
-      },
+    ":read-only": {
+      cursor: "not-allowed",
+      opacity: 0.7,
     },
-  }),
+  },
 
-  (template, { fonts }) => [
-    {
-      appearance: "none",
-      backgroundColor: "transparent",
-      border: "none",
-      borderRadius: 0,
-      fontFamily: "inherit",
-      fontSize: 16,
-      fontWeight: fonts.medium,
-      height: "100%",
-      width: "100%",
+  defaultVariants: {
+    template: "default",
+  },
 
-      ":disabled": {
-        cursor: "not-allowed",
-        opacity: 0.7,
-      },
-
-      ":focus": {
-        outline: "none",
+  variants: {
+    template: {
+      default: {
+        color: "black",
+        selectors: {
+          "&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active":
+            {
+              caretColor: "black",
+              transition: "background-color 9999s ease-out",
+              WebkitBoxShadow: "0 0 0 1000px white inset",
+              WebkitTextFillColor: "black",
+            },
+        },
 
         "::placeholder": {
-          color: "transparent",
+          color: colors.grayDarker,
         },
       },
 
-      ":read-only": {
-        cursor: "not-allowed",
-        opacity: 0.7,
+      error: {
+        color: "black",
+        selectors: {
+          "&:-webkit-autofill, &:-webkit-autofill:hover, &:-webkit-autofill:focus, &:-webkit-autofill:active":
+            {
+              caretColor: "black",
+              transition: "background-color 9999s ease-out",
+              WebkitBoxShadow: "0 0 0 1000px white inset",
+              WebkitTextFillColor: colors.red,
+            },
+        },
+
+        "::placeholder": {
+          color: colors.red,
+        },
       },
     },
-    template,
-  ]
-);
+  },
+}));
 
 export const iconHolderClass = style({
   alignItems: "center",
@@ -118,3 +121,5 @@ export const errorIconClass = style(({ colors }) => ({
   },
   width: 20,
 }));
+
+export type TInputVariants = RecipeVariants<typeof inputClass>;

@@ -1,15 +1,9 @@
 import { globalStyle as vanillaGlobalStyle } from "@vanilla-extract/css";
 
-import { devices } from "../variables";
-
-import { vars } from "../theme.css";
-
-import type { GlobalStyleArg, ThemeVars } from "./types";
+import { devices, themeVars, type GlobalStyleArg } from "@/theme";
 
 const globalStyle = (selector: string, rule: GlobalStyleArg): void => {
-  const themeVars: ThemeVars = { devices, ...vars };
-
-  vanillaGlobalStyle(selector, typeof rule === "function" ? rule(themeVars) : rule);
+  vanillaGlobalStyle(selector, typeof rule === "function" ? rule({ devices, ...themeVars }) : rule);
 };
 
 export { globalStyle };

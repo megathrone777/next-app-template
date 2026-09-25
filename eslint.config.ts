@@ -12,7 +12,6 @@ const config = defineConfig([
       ".next/**",
       "build/**",
       "eslint.config.ts",
-      "jest.config.ts",
       "next-env.d.ts",
       "node_modules/**",
       "out/**",

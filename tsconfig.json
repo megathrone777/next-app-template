@@ -4,7 +4,6 @@
     "esModuleInterop": true,
     "importHelpers": true,
     "incremental": true,
-    "tsBuildInfoFile": "node_modules/.cache/tsbuildinfo",
     "isolatedModules": true,
     "jsx": "react-jsx",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -14,6 +13,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "paths": {
       "@/*": ["./src/*"],
       "@/ui": ["./src/theme/components/"]
@@ -26,8 +26,8 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es2017"
+    "target": "es2022",
   },
-  "include": ["**/*.ts", "**/*.tsx", ".next/dev/types/**/*.ts", ".next/types/**/*.ts"],
-  "exclude": ["**/node_modules", "build"]
+  "exclude": ["**/node_modules", "build"],
+  "include": ["**/*.ts", "**/*.tsx", ".next/dev/types/**/*.ts", ".next/types/**/*.ts"]
 }

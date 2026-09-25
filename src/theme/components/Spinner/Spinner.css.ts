@@ -1,41 +1,34 @@
-import { keyframes } from "@vanilla-extract/css";
+import { recipe, type RecipeVariants } from "@/theme";
 
-import { styleVariants } from "@/theme";
-
-const spin = keyframes({
-  "0%": {
-    transform: "rotate(0deg)",
+export const wrapperClass = recipe(({ animations }) => ({
+  base: {
+    animationDuration: ".5s",
+    animationIterationCount: "infinite",
+    animationName: animations.spin,
+    animationTimingFunction: "linear",
+    borderRadius: "50%",
+    borderStyle: "solid",
   },
 
-  "100%": {
-    transform: "rotate(360deg)",
-  },
-});
-
-export const wrapperClass = styleVariants(
-  {
-    normal: {
-      borderWidth: 8,
-      height: 50,
-      width: 50,
-    },
-
-    small: {
-      borderWidth: 4,
-      height: 22,
-      width: 22,
-    },
+  defaultVariants: {
+    template: "normal",
   },
 
-  (template) => [
-    {
-      animationDuration: ".5s",
-      animationIterationCount: "infinite",
-      animationName: spin,
-      animationTimingFunction: "linear",
-      borderRadius: "50%",
-      borderStyle: "solid",
+  variants: {
+    template: {
+      normal: {
+        borderWidth: 8,
+        height: 50,
+        width: 50,
+      },
+
+      small: {
+        borderWidth: 4,
+        height: 22,
+        width: 22,
+      },
     },
-    template,
-  ]
-);
+  },
+}));
+
+export type TSpinnerVariants = RecipeVariants<typeof wrapperClass>;

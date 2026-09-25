@@ -1,69 +1,40 @@
-import { rgba, style, styleVariants } from "@/theme";
+import { style, recipe, type RecipeVariants } from "@/theme";
 
-export const buttonClass = styleVariants(
-  ({ devices }) => ({
-    normal: {
-      fontSize: 17,
-      height: 45,
-      minWidth: 140,
-      paddingInline: 10,
+export const wrapperClass = recipe(({ colors, devices, fonts }) => ({
+  base: {
+    borderRadius: 6,
+    display: "inline-flex",
+    fontWeight: fonts.medium,
+  },
 
-      "@media": {
-        [devices.tablet]: {
-          fontSize: 18,
-          height: 46,
-          minWidth: 155,
+  defaultVariants: {
+    size: "medium",
+    template: "primary",
+  },
+
+  variants: {
+    size: {
+      large: {
+        height: 42,
+
+        "@media": {
+          [devices.mobile]: { height: 36 },
         },
-
-        [devices.desktop]: {
-          fontSize: 21,
-          height: 55,
-          minWidth: 190,
-          paddingInline: 15,
-        },
-      },
-    },
-
-    small: {
-      fontSize: 16,
-      height: 36,
-      minWidth: 36,
-      paddingInline: 4,
-    },
-  }),
-  (template, { colors, easing, fonts }) => [
-    {
-      alignItems: "center",
-      backgroundColor: colors.red,
-      border: "none",
-      borderRadius: 5,
-      boxShadow: `0 0 10px 0 ${rgba(colors.black, 0.5)}`,
-      color: "white",
-      display: "inline-grid",
-      fontFamily: "inherit",
-      fontWeight: fonts.medium,
-      justifyContent: "center",
-      lineHeight: 1,
-      outline: "none",
-      textDecoration: "none",
-      transition: `box-shadow 0.2s ${easing}`,
-      userSelect: "none",
-
-      ":disabled": {
-        cursor: "default",
-        opacity: 0.7,
       },
 
-      ":hover": {
-        boxShadow: `0 0 14px 0 ${rgba(colors.red, 0.75)}`,
-      },
+      medium: { height: 36 },
+      small: { height: 32 },
     },
-    template,
-  ]
-);
 
-export const iconClass = style({
-  color: "white",
-  minWidth: 18,
-  width: 18,
+    template: {
+      primary: { background: colors.blue, color: colors.white },
+      secondary: { background: colors.grayLighter, color: colors.black },
+    },
+  },
+}));
+
+export const labelClass = style({
+  cursor: "pointer",
 });
+
+export type TButtonVariants = RecipeVariants<typeof wrapperClass>;

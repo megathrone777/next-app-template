@@ -4,8 +4,8 @@ import { Button } from "@/ui";
 
 const Page: React.FC = () => (
   <div className="error">
-    <h1 className="error__title">Stránka nenalezena</h1>
-    <Button href="/">Hlavní stránka</Button>
+    <h1 className="error__title">Page not found</h1>
+    <Button href="/">Back to main page</Button>
   </div>
 );
 

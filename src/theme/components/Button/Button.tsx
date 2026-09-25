@@ -1,67 +1,60 @@
 import React from "react";
-import { Link as ViewTransitionLink } from "next-view-transitions";
-import Link, { type LinkProps } from "next/link";
+// import { Link as ViewTransitionLink } from "next-view-transitions";
+// import Link, { type LinkProps } from "next/link";
 
 import { Icon } from "@/ui";
 
-import { buttonClass, iconClass } from "./Button.css";
+import { wrapperClass, labelClass } from "./Button.css";
 
-import type { RouteType } from "next/dist/lib/load-custom-routes";
+// import type { RouteType } from "next/dist/lib/load-custom-routes";
 import type { TProps } from "./Button.types";
 
 const Button: React.FC<TProps> = ({
   children,
-  disabled,
-  href,
+  className,
+  // disabled,
+  // href,
   iconId,
-  id,
-  onClick,
-  target,
-  template = "normal",
-  title,
+  // id,
+  // onClick,
+  size,
+  // target,
+  template,
+  // title,
   type = "button",
-  value,
-  withTransition,
+  // value,
+  ...rest
 }) => {
-  const renderLink = (): React.ReactElement => {
-    if (!href) return <></>;
-    const linkProps: LinkProps<RouteType> = {
-      className: buttonClass[template],
-      href,
-      target,
-      title,
-    };
-    const linkContent: React.ReactNode = iconId ? (
-      <Icon
-        className={iconClass}
-        id={iconId}
-      />
-    ) : (
-      children
-    );
+  const renderLayout: React.ReactElement = (
+    <>
+      {iconId && <Icon id={iconId} />}
+      {children && <span className={labelClass}>{children}</span>}
+    </>
+  );
 
-    if (withTransition) {
-      return <ViewTransitionLink {...linkProps}>{linkContent}</ViewTransitionLink>;
-    }
+  // if (href) {
+  //   return (
+  //     <a
+  //       className={`
+  //         ${wrapperClass({ size, template })}
+  //         ${className && !!className.length ? ` ${className}` : ""}
+  //       `}
+  //       {...{ href, target }}
+  //     >
+  //       {renderLayout}
+  //     </a>
+  //   );
+  // }
 
-    return <Link {...linkProps}>{linkContent}</Link>;
-  };
-
-  return href ? (
-    renderLink()
-  ) : (
+  return (
     <button
-      {...{ disabled, id, onClick, title, type, value }}
-      className={buttonClass[template]}
+      className={`
+        ${wrapperClass({ size, template })}
+        ${className && !!className.length ? ` ${className}` : ""}
+      `}
+      {...{ type, ...rest }}
     >
-      {iconId ? (
-        <Icon
-          className={iconClass}
-          id={iconId}
-        />
-      ) : (
-        children
-      )}
+      {renderLayout}
     </button>
   );
 };

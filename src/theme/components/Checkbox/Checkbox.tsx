@@ -2,13 +2,7 @@ import React, { useId } from "react";
 
 import { Icon } from "@/ui";
 
-import {
-  iconClass,
-  inputClass,
-  labelClass,
-  layoutClass,
-  wrapperClass,
-} from "./Checkbox.css";
+import { iconClass, inputClass, labelClass, layoutClass, wrapperClass } from "./Checkbox.css";
 
 import type { TProps } from "./Checkbox.types";
 
@@ -20,7 +14,7 @@ const Checkbox: React.FC<TProps> = ({
   label,
   name,
   onChange,
-  template = "normal",
+  template,
   type,
   value,
 }) => {
@@ -28,7 +22,7 @@ const Checkbox: React.FC<TProps> = ({
 
   return (
     <div className={`${wrapperClass} ${className ? className : ""}`}>
-      <span className={layoutClass[template]}>
+      <span className={layoutClass({ template })}>
         <input
           {...{
             checked,
@@ -44,13 +38,13 @@ const Checkbox: React.FC<TProps> = ({
         />
 
         <Icon
-          className={iconClass[template]}
+          className={iconClass({ template })}
           id="checkmark"
         />
       </span>
 
       <label
-        className={labelClass[template]}
+        className={labelClass({ template })}
         htmlFor={inputId}
       >
         {label}

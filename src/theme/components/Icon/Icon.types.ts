@@ -1,6 +1,8 @@
-export type TIconID = "address" | "angle" | "car" | "checkmark" | "exclamation" | "trash";
+import type { DetailedHTMLProps, HTMLAttributes } from "react";
 
-export interface TProps {
-  className?: React.HTMLAttributes<HTMLElement>["className"];
-  id: TIconID;
+export interface TProps extends DetailedHTMLProps<
+  HTMLAttributes<HTMLOrSVGElement>,
+  HTMLOrSVGElement
+> {
+  id: TIconId;
 }

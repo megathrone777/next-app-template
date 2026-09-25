@@ -1,6 +1,4 @@
-import type { TIconID } from "./Icon.types";
-
-export const viewBox: Record<TIconID, string> = {
+export const viewBox: Record<TIconId, string> = {
   address: "0 0 384 512",
   angle: "0 0 20 20",
   car: "0 0 24 24",

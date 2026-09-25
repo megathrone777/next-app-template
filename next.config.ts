@@ -4,6 +4,7 @@ import type { NextConfig } from "next";
 
 const withVanillaExtract = createVanillaExtractPlugin({
   unstable_turbopack: {
+    glob: ["**/*.css.ts"],
     mode: "auto",
   },
 });

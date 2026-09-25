@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 const description: string = "Meta description";
-const imageURL: string = "/images/og_img.jpg";
-const publicURL: string = process.env.PUBLIC_URL;
+const imageUrl: string = "/images/og_img.png";
+const publicUrl: string = process.env.PUBLIC_URL;
 const title: string = "Meta title";
 
 const metadata: Metadata = {
@@ -30,20 +30,20 @@ const metadata: Metadata = {
       url: "/favicon-96x96.png",
     },
   ],
-  metadataBase: new URL(publicURL),
+  metadataBase: new URL(publicUrl),
   openGraph: {
     description,
-    images: `${publicURL}${imageURL}`,
+    images: `${publicUrl}${imageUrl}`,
     siteName: "Site name",
     title,
     type: "website",
-    url: publicURL,
+    url: publicUrl,
   },
   title,
   twitter: {
     card: "summary_large_image",
     description,
-    images: imageURL,
+    images: imageUrl,
   },
 };
 

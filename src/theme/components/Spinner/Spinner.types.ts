@@ -1,6 +1,8 @@
-import type React from "react";
+import type { TSpinnerVariants } from "./Spinner.css";
 
-export interface TProps {
-  color?: React.CSSProperties["color"];
-  template?: "normal" | "small";
+import type { CSSProperties, DetailedHTMLProps, HTMLAttributes } from "react";
+
+export interface TProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>, TSpinnerVariants {
+  color?: CSSProperties["color"];
 }
